@@ -1,36 +1,43 @@
+
 const TICTACTOE = (function() {
     return {
         board : [null, null, null, null, null, null, null, null, null],
-        displayBoard(currentBoard) {
-            let cells = document.querySelectorAll(".cell");
-            console.log('cells', cells)
-            for (let i=0; i<cells.length; i++) {
-                cells[i].addEventListener('click', ()=> {
-                    cells[i].textContent = "X";
-                })
-            }
-        }
     }
 })();
 
-// function createPlayers(numOfPlayers) {
-//     let playersObj = {}
-//     for (let i=0; i<numOfPlayers; i++) {
-//         let input = "What is Player"
-//     }
-//     return playersObj;
-
-// }
-
-
 function game() {
-    let currentBoard = TICTACTOE.board2;
-
-    TICTACTOE.displayBoard(currentBoard)
-
-
+    let board = TICTACTOE.board;
+    let isPlayer1Turn = true;
     console.log('fired')
-    
+
+    function interactiveBoard() {
+        let cells = document.querySelectorAll(".cell");
+        console.log('cells', cells)
+        for (let i=0; i<cells.length; i++) {
+            cells[i].addEventListener('click', ()=> {
+                if (this.isPlayer1Turn) {
+                    board[i] = "x";
+                    this.isPlayer1Turn = !this.isPlayer1Turn;
+
+                } else {
+                    board[i] = "o";
+                    this.isPlayer1Turn = !this.isPlayer1Turn; 
+                }
+                displayBoard()
+            })
+        }
+    }
+
+    function displayBoard() {
+        let cells = document.querySelectorAll(".cell");
+        for (let i=0; i<cells.length; i++) {
+            cells[i].textContent = board[i]
+        }
+    }
+
+    return {interactiveBoard}
 }
 
-game()
+let newGame = game();
+console.log(newGame)
+newGame.interactiveBoard()
