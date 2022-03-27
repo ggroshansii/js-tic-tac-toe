@@ -1,4 +1,5 @@
 
+
 const TICTACTOE = (function() {
     return {
         board : [null, null, null, null, null, null, null, null, null],
@@ -6,6 +7,13 @@ const TICTACTOE = (function() {
 })();
 
 function game() {
+
+    var myModal = new bootstrap.Modal(document.getElementById('onLoadModal'), {
+        keyboard: false
+      })
+      myModal.show()
+
+
     let board = TICTACTOE.board;
     let isPlayer1Turn = true;
     console.log('fired')
